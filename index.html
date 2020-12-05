@@ -1,0 +1,867 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo2020</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" type="image/png" href="./img/logo.png"/>
+</head>
+<script>
+    function myFunction() {
+        window.location.href = "http://google.com/";
+}
+</script>
+<body>
+    <div class="card">
+        <div class="menu-profile">
+          <img class="menu" src="https://i.postimg.cc/Zn6PHwfB/open-menu.png" alt="menu">
+          <img class="profile" src="./img/logo.png" alt="profile">
+        </div>
+        <h3>Let's enjoy <br />your trip!</h3>
+        <div class="search-bar">
+             <div class="bofy">
+                <div class="con-search notValue">
+                        <div class="con-input">
+                            <input 
+                            
+                                onblur="handleBlur()" 
+                                onfocus="handleFocus(event)" 
+                                placeholder="Search User" 
+                                oninput="handleSearch(event)" 
+                                type="text">
+                            <i class='bx bx-search'></i>
+                            <i onclick="handleRemove()" class='bx bx-x' ></i>
+                        </div>
+                        <div class="content-results">
+                            <div class="con-results" onclick="myFunction()"></div>
+                        </div>
+                    </div>
+                     <style>
+                         body {
+        --primary: 25,91,255;
+        --color: 44, 62, 80;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 40px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background: #f4f7f8;
+        height: calc(var(--vh, 1vh) * 100);
+        overflow: hidden;
+        color: rgb(var(--color));
+        width: 100%;
+        height: 10vh;
+    }
+    * {
+        list-style: none;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+    }
+    .con-search {
+        position: relative;
+        width: 200px;
+    }
+    .focus .content-results {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0, 0);
+    }
+    .con-input {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+    .con-input i {
+        position: absolute;
+        right: 15px;
+        font-size: 1.5rem;
+        transition: all .25s ease;
+        opacity: .5;
+    }
+    .notValue .con-input i.bx-search  {
+        display: block;
+    }
+    .con-input i.bx-search {
+        display: none;
+    }
+    .notValue .con-input i.bx-x {
+        display: none;
+    }
+    .con-input i.bx-x {
+        display: block;
+        cursor: pointer;
+    }
+
+    .con-input input {
+        width: 100%;
+        padding: 13px 20px;
+        box-sizing: border-box;
+        border: 0px;
+        border-radius: 20px;
+        transition: all .25s ease;
+    }
+    .con-input input:focus {
+        transform: translate(0, -6px);
+        box-shadow: 0px 10px 20px 0px rgba(0,0,0,.05);
+    }
+    .con-input input:focus ~ i {
+        transform: translate(0, -6px);
+        opacity: 1;
+    }
+    .content-results {
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        margin-top: 10px;
+        border-radius: 25px;
+        box-shadow: 0px 10px 20px 0px rgba(0,0,0,.05);
+        transform: translate(0, -10px);
+        transition: all .25s ease;
+        opacity: 0;
+        z-index: 10;
+        visibility: hidden;
+        padding-right: 10px;
+        overflow: hidden;
+    }
+    .con-results {
+        width: 100%;
+        overflow: auto;
+        max-height: 300px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .con-results:empty {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .not-results {
+        text-align: center;
+        padding: 15px;
+        font-size: .9rem;
+        opacity: .7;
+        display: none;
+    }
+    .con-search:not(.notValue) .con-results:empty ~ .not-results {
+        display: block;
+    }
+    .con-results .result {
+        padding: 15px;
+        margin: 5px 0px;
+        list-style: none;
+        transition: all .25s ease;
+        position: relative;
+        cursor: pointer;
+        width: calc(100% - 10px);
+        margin-left: 10px;
+        border-radius: 20px;
+    }
+    .con-results .result:hover {
+        background: #f4f7f8;
+    }
+    .con-results .result p {
+        font-size: .9rem;
+        color: rgba(var(--color), .6);
+    }
+    .con-results .result b {
+        background: rgba(var(--color), .1);
+        text-decoration: underline;
+        color: rgba(var(--color), 1);
+        border-radius: 2px;
+    }
+    .web {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        font-size: .8rem;
+        color: rgba(var(--color), .5);
+        padding: 20px;
+    }
+    .hidden {
+        opacity: 0;
+        margin-top: -15px;
+    }
+    .con-results::-webkit-scrollbar {
+        width: 5px;
+    }
+    .con-results::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: #000;
+    }
+                     </style>
+                     <script>
+                         const users = [
+    {
+      "id": 1,
+      "name": "Jardin Alpin Meyrin",
+      "username": "...",
+      "email": "...",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "...",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jardin Alpin Meyrin",
+      "username": "...",
+      "email": "...",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "...",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      "id": 3,
+      "name": "Genebra",
+      "username": "...",
+      "email": "🍁🍂🍁",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "...",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      "id": 4,
+      "name": "Leysin",
+      "username": "...",
+      "email": "⛰🏔🌤",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "..",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      "id": 5,
+      "name": "Interlaken",
+      "username": "...",
+      "email": "📷🏔🏔",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "...",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      "id": 6,
+      "name": "Jungfraujoch",
+      "username": "...",
+      "email": "🏔📷",
+      "address": {
+        "street": "...",
+        "suite": "...",
+        "city": "...",
+        "zipcode": "...",
+        "geo": {
+          "lat": "...",
+          "lng": "..."
+        }
+      },
+      "phone": "...",
+      "website": "...",
+      "company": {
+        "name": "...",
+        "catchPhrase": "...",
+        "bs": "..."
+      }
+    },
+    {
+      /*"id": 7,
+      "name": "Kurtis Weissnat",
+      "username": "Elwyn.Skiles",
+      "email": "Telly.Hoeger@billy.biz",
+      "address": {
+        "street": "Rex Trail",
+        "suite": "Suite 280",
+        "city": "Howemouth",
+        "zipcode": "58804-1099",
+        "geo": {
+          "lat": "24.8918",
+          "lng": "21.8984"
+        }
+      },
+      "phone": "210.067.6132",
+      "website": "elvis.io",
+      "company": {
+        "name": "Johns Group",
+        "catchPhrase": "Configurable multimedia task-force",
+        "bs": "generate enterprise e-tailers"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Nicholas Runolfsdottir V",
+      "username": "Maxime_Nienow",
+      "email": "Sherwood@rosamond.me",
+      "address": {
+        "street": "Ellsworth Summit",
+        "suite": "Suite 729",
+        "city": "Aliyaview",
+        "zipcode": "45169",
+        "geo": {
+          "lat": "-14.3990",
+          "lng": "-120.7677"
+        }
+      },
+      "phone": "586.493.6943 x140",
+      "website": "jacynthe.com",
+      "company": {
+        "name": "Abernathy Group",
+        "catchPhrase": "Implemented secondary concept",
+        "bs": "e-enable extensible e-tailers"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Glenna Reichert",
+      "username": "Delphine",
+      "email": "Chaim_McDermott@dana.io",
+      "address": {
+        "street": "Dayna Park",
+        "suite": "Suite 449",
+        "city": "Bartholomebury",
+        "zipcode": "76495-3109",
+        "geo": {
+          "lat": "24.6463",
+          "lng": "-168.8889"
+        }
+      },
+      "phone": "(775)976-6794 x41206",
+      "website": "conrad.com",
+      "company": {
+        "name": "Yost and Sons",
+        "catchPhrase": "Switchable contextually-based project",
+        "bs": "aggregate real-time technologies"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Clementina DuBuque",
+      "username": "Moriah.Stanton",
+      "email": "Rey.Padberg@karina.biz",
+      "address": {
+        "street": "Kattie Turnpike",
+        "suite": "Suite 198",
+        "city": "Lebsackbury",
+        "zipcode": "31428-2261",
+        "geo": {
+          "lat": "-38.2386",
+          "lng": "57.2232"
+        }
+      },
+      "phone": "024-648-3804",
+      "website": "ambrose.net",
+      "company": {
+        "name": "Hoeger LLC",
+        "catchPhrase": "Centralized empowering task-force",
+        "bs": "target end-to-end models"
+      }*/
+    }
+  ]
+
+const conSearch = document.querySelector('.con-search')
+function handleRemove() {
+    conSearch.querySelector('input').value = ''
+    conSearch.classList.add('notValue')
+}
+function handleFocus(evt) {
+    if (evt.target.value) {
+        conSearch.classList.add('focus')
+    }
+}
+function handleBlur() {
+    conSearch.classList.remove('focus')
+}
+
+function handleSearch(evt) {
+    const value = evt.target.value
+    const newUsers = users.filter((user) => {
+        delete user.address
+        delete user.company
+        delete user.phone
+        delete user.id
+        delete user.username
+        const string = JSON.stringify(user).toLowerCase()
+        if (string.indexOf(value.toLowerCase()) !== -1) {
+            return user
+        }
+    })
+    renderResults(newUsers, value)
+}
+
+function renderResults(results, value) {
+    const conResults = document.querySelector('.con-results')
+    conResults.innerHTML = ''
+    
+    if (!value) {
+        conSearch.classList.remove('focus')
+        conSearch.classList.add('notValue')
+        return    
+    } 
+    conSearch.classList.remove('notValue')
+    conSearch.classList.add('focus')
+    results.forEach((result) => {
+        const resultElement = document.createElement('div')
+        resultElement.className = 'result'
+        const title = document.createElement('h5')
+        const text = document.createElement('p')
+        const web = document.createElement('div')
+        web.className = 'web'
+        title.innerHTML = result.name.toLowerCase().replace(value, `<b>${value}</b>`)
+        text.innerHTML = result.email.toLowerCase().replace(value, `<b>${value}</b>`)
+        web.innerHTML = result.website.toLowerCase().replace(value, `<b>${value}</b>`)
+        resultElement.appendChild(title)
+        resultElement.appendChild(text)
+        resultElement.appendChild(web)
+        resultElement.classList.add('hidden')
+        conResults.appendChild(resultElement)
+        setTimeout(() => {
+            resultElement.classList.remove('hidden')
+        }, 20);
+    })
+}
+                     </script>
+                    </div>
+        </div>
+        <div class="slider-container">
+          <ul>
+              <li class="active">All</li>
+              <li>New</li>
+              <li>Popular</li>
+              <li>Top 10</li>
+          </ul>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img1.jpg" alt="">
+                  <h5>🍁🍂🍁<br /></h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Genebra</h6>
+              </div>
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img2.jpg" alt="">
+                  <h5>🏔📷</h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Jungfraujoch</h6>
+              </div>
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img3.jpg" alt="">
+                  <h5>📷🏔🏔</h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Interlaken</h6>
+              </div>
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img4.jpg" alt="">
+                  <h5></h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Jardin botanique alpin</h6>
+              </div>
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img5.jpg" alt="">
+                  <h5>⛰🏔🌤<br /> </h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Leysin</h6>
+              </div>
+              <div class="swiper-slide">
+                  <div class="shade"></div>
+                  <img src="./img/img6.jpg" alt="">
+                  <h5></h5>
+                  <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Jardin Alpin Meyrin</h6>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="slider-container">
+            <h5>Popular Place</h5>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img2.jpg" alt="">
+                    <h5>🏔📷</h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Jungfraujoch</h6>
+                  </div>
+                  
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img3.jpg" alt="">
+                    <h5>📷🏔🏔<br /> </h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Interlaken</h6>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img5.jpg" alt="">
+                    <h5>⛰🏔🌤</h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Leysin</h6>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img1.jpg" alt="">
+                    <h5>🍁🍂🍁<br /> </h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Genebra</h6>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img6.jpg" alt="">
+                    <h5>Jardin Alpin Meyrin</h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/></h6>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="shade"></div>
+                    <img src="./img/img4.jpg" alt="">
+                    <h5></h5>
+                    <h6><img src="https://i.postimg.cc/G3DjbpcL/pin.png"/>Jardin Alpin Meyrin</h6>
+              </div>
+
+              
+                  
+                </div>
+            </div> 
+        
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js">
+    </script>
+
+    <script src="js/main.js"></script>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Poppins&display=swap');
+
+*{  margin:0; padding:0; box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; }
+
+body{ width: 100%; height: 100%; display: flex;
+    align-items: center; justify-content: center; }
+
+.card{
+    width: 260px;
+    height: 650px;
+    overflow: hidden;
+    background-color: #fcfcfc;
+    border-radius: 4%;
+    margin-top: 10px;
+    box-shadow: 5px 5px 20px rgba(180, 176, 176, 0.377);
+    padding: 10px 15px;
+}
+
+.menu-profile { display: flex; justify-content: space-between;
+    align-items: center; margin-top: 15px; }
+
+.menu-profile .menu{ width: 18px; height: 18px; cursor: pointer; }
+
+.menu-profile .profile{ width: 35px; height: 35px; border-radius: 50%;
+    cursor: pointer; }
+
+.card h3{ font-size: 19px; margin-top: 15px;
+    line-height: 24px; color: #131313; }
+
+.card .search-bar{ display: flex; margin-top: 15px; }
+
+.card input{ width: 100%; outline: none; padding: 10px 10px;
+    background-color: #f5f4f4; border:none;
+    border-radius: 4px; margin-right: 3px; }
+
+.card input::placeholder{ font-size: 10px;
+    color: #b7b7b7; font-weight: 500; }
+
+.card .search-bar button{
+    width: 45px;
+    border:none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #fd5e3f;
+    outline: none;
+}
+
+.card .search-bar button img{ width: 45%; }
+
+.slider-container{ margin-top: 22px; margin-bottom: 20px; }
+
+.slider-container ul{ list-style: none;
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 18px; }
+
+.slider-container ul li{ font-size: 12px; font-weight: 600;
+    cursor: pointer; }
+
+.slider-container ul li.active{
+    color: #fd5e3f; line-height: 20px;
+    border-bottom: 1px solid #fd5e3f; }
+
+.swiper-container { width: 100%; height: 170px;
+    margin: 10px 0; }
+
+.swiper-slide {
+    text-align: center; font-size: 18px;
+    background: #fff; margin-right: 10px !important;
+    width: 110px !important; display: flex;
+    justify-content: center; align-items: center;
+    border-radius: 5%; overflow: hidden;
+    cursor: pointer; }
+
+.swiper-slide img{ width: 100%; height: 100%; }
+
+.swiper-slide .shade{ width: 100%;
+    height: 100%; background-color: rgba(0, 0, 0, 0.164);
+    position: absolute; }
+
+.swiper-slide h5{ position: absolute;
+    color: #fff; font-size: 10px;
+    left: 0; margin-left: 8px;
+    text-align:left; line-height: 14px;
+    bottom: 17%; }
+
+.swiper-slide h6{
+    position: absolute; color: #fff;
+    font-size: 9px; left: 0;
+    margin-left: 8px; text-align:left;
+    line-height: 14px; bottom: 6%;
+    font-weight: 400; } 
+
+.swiper-slide h6 img{
+    width: 10px; height: 10px;
+    margin-right: 5px; }
+
+
+
+
+/* Use this when making a website
+
+body{
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+}
+@media (max-width: 500px){
+    .card{
+        width: 100%;
+        background-color: #fcfcfc;
+        border-radius: 4%;
+        box-shadow: 5px 5px 15px -3px rgba(180, 176, 176, 0.377);
+        padding: 10px 15px;
+    }
+    .menu-profile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 15px;
+    }
+    .menu-profile .menu{
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .menu-profile .profile{
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .card h3{
+        font-size: 19px;
+        margin-top: 15px;
+        line-height: 24px;
+        color: #131313;
+    }
+    .card .search-bar{
+        display: flex;
+        margin-top: 15px;
+    }
+    .card input{
+        width: 100%;
+        outline: none;
+        padding: 10px 10px;
+        background-color: #f5f4f4;
+        border:none;
+        border-radius: 4px;
+        margin-right: 3px;
+    }
+    .card input::placeholder{
+        font-size: 10px;
+        color: #b7b7b7;
+        font-weight: 500;
+    }
+    .card .search-bar button{
+        width: 45px;
+        border:none;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: #fd5e3f;
+        outline: none;
+    }
+    .card .search-bar button img{
+        width: 45%;
+    }
+    .slider-container{
+        margin-top: 22px;
+       margin-bottom: 20px;
+    }
+    .slider-container ul{
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+    .slider-container ul li{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .slider-container ul li.active{
+        color: #fd5e3f;
+        line-height: 20px;
+        border-bottom: 1px solid #fd5e3f;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 170px;
+        margin: 10px 0;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        margin-right: 10px !important;
+        width: 110px !important;
+    
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5%;
+        overflow: hidden;
+    }
+    .swiper-wrapper{
+        display: flex;
+        justify-content: flex-start !important;
+    }
+    
+    .swiper-slide img{
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide .shade{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.164);
+        position: absolute;
+    }
+    .swiper-slide h5{
+        position: absolute;
+        color: #fff;
+        font-size: 10px;
+        left: 0;
+        margin-left: 8px;
+        text-align:left;
+        line-height: 14px;
+        bottom: 17%;
+    }
+    .swiper-slide h6{
+        position: absolute;
+        color: #fff;
+        font-size: 9px;
+        left: 0;
+        margin-left: 8px;
+        text-align:left;
+        line-height: 14px;
+        bottom: 6%;
+        font-weight: 400;
+    } 
+    .swiper-slide h6 img{
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+    }
+} */
+
+</style>
+<script>
+    var swiper = new Swiper(".swiper-container", {
+  slidesPerView: 2,
+  spaceBetween: 30,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true
+  }
+});
+
+</script>
+</html>
